@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy 17th Birthday, Lucas! 🎖️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a0c0f;
+      font-family: 'Roboto', sans-serif;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        linear-gradient(rgba(0, 200, 80, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 200, 80, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+      animation: gridShift 20s linear infinite;
+    }
+
+    @keyframes gridShift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(40px); }
+    }
+
+    /* Scanline overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.15) 2px,
+        rgba(0, 0, 0, 0.15) 4px
+      );
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .card {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(160deg, #0d1117 0%, #111820 40%, #0a1410 100%);
+      border: 1px solid #1a3a1a;
+      border-radius: 4px;
+      width: 460px;
+      max-width: 100%;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(0, 200, 80, 0.15),
+        0 0 40px rgba(0, 200, 80, 0.08),
+        0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Top tactical bar */
+    .top-bar {
+      background: linear-gradient(90deg, #0f2010, #1a3a1a, #0f2010);
+      border-bottom: 1px solid rgba(0, 200, 80, 0.3);
+      padding: 6px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-bar span {
+      font-family: 'Oswald', monospace;
+      font-size: 10px;
+      color: rgba(0, 200, 80, 0.6);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #00c850;
+      box-shadow: 0 0 6px #00c850;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    /* Hero image area */
+    .hero {
+      position: relative;
+      height: 280px;
+      background: #080c0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(20%) contrast(1.1) brightness(0.85);
+      mix-blend-mode: normal;
+    }
+
+    /* Green overlay vignette */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, transparent 40%, rgba(0, 10, 0, 0.7) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, transparent 30%, transparent 60%, rgba(0, 0, 0, 0.6) 100%);
+      z-index: 2;
+    }
+
+    /* NVG glow effect */
+    .nvg-glow {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 30px;
+      background: radial-gradient(ellipse, rgba(50, 150, 255, 0.4) 0%, transparent 70%);
+      filter: blur(8px);
+      z-index: 3;
+      animation: nvgPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes nvgPulse {
+      0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.2); }
+    }
+
+    /* Classification stamp */
+    .stamp {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      border: 2px solid rgba(255, 60, 60, 0.7);
+      color: rgba(255, 60, 60, 0.7);
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      padding: 3px 8px;
+      border-radius: 2px;
+      transform: rotate(-8deg);
+      z-index: 4;
+      text-transform: uppercase;
+    }
+
+    /* Corner brackets */
+    .corner {
+      position: absolute;
+      width: 20px; height: 20px;
+      border-color: rgba(0, 200, 80, 0.5);
+      border-style: solid;
+      z-index: 4;
+    }
+    .corner.tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; }
+    .corner.tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+    .corner.bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; }
+    .corner.br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+    /* Header section */
+    .header-section {
+      padding: 20px 24px 12px;
+      text-align: center;
+      border-bottom: 1px solid rgba(0, 200, 80, 0.1);
+    }
+
+    .mission-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: rgba(0, 200, 80, 0.5);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .happy-bday {
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      letter-spacing: 6px;
+      color: rgba(200, 220, 200, 0.7);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 54px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #ffffff 0%, #00c850 60%, #008c38 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      text-shadow: none;
+      animation: nameGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes nameGlow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.15); }
+    }
+
+    .age-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 200, 80, 0.1);
+      border: 1px solid rgba(0, 200, 80, 0.3);
+      color: #00c850;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      letter-spacing: 3px;
+      padding: 5px 18px;
+      margin-top: 10px;
+      text-transform: uppercase;
+    }
+
+    /* Tactical divider */
+    .tac-divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 24px;
+      margin: 14px 0;
+    }
+
+    .tac-divider .line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 200, 80, 0.3), transparent);
+    }
+
+    .tac-divider .diamond {
+      width: 6px; height: 6px;
+      background: rgba(0, 200, 80, 0.5);
+      transform: rotate(45deg);
+    }
+
+    /* Message box */
+    .message-box {
+      margin: 0 24px 20px;
+      background: rgba(0, 200, 80, 0.03);
+      border: 1px solid rgba(0, 200, 80, 0.12);
+      border-radius: 2px;
+      padding: 20px;
+    }
+
+    .message-box p {
+      color: rgba(180, 210, 180, 0.85);
+      font-size: 14.5px;
+      line-height: 1.8;
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: 400;
+    }
+
+    .message-box p:last-child { margin-bottom: 0; }
+
+    .message-box .highlight {
+      color: #00c850;
+      font-weight: 700;
+    }
+
+    /* Flag patch */
+    .flag-row {
+      text-align: center;
+      padding: 4px 0 14px;
+      font-size: 24px;
+      letter-spacing: 8px;
+    }
+
+    /* Signature */
+    .signature {
+      text-align: center;
+      padding: 0 24px 8px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: rgba(0, 200, 80, 0.5);
+      text-transform: uppercase;
+    }
+
+    /* Bottom bar */
+    .bottom-bar {
+      background: linear-gradient(90deg, #0f2010, #1a3a1a, #0f2010);
+      border-top: 1px solid rgba(0, 200, 80, 0.2);
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .bottom-bar span {
+      font-family: 'Oswald', monospace;
+      font-size: 9px;
+      color: rgba(0, 200, 80, 0.4);
+      letter-spacing: 2px;
+    }
+
+    /* Particles */
+    .particles-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(0, 200, 80, 0.6);
+      border-radius: 50%;
+      animation: particleFall linear infinite;
+    }
+
+    @keyframes particleFall {
+      0% { transform: translateY(-10px); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 0.5; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    /* Radar sweep in corner */
+    .radar {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 80px;
+      height: 80px;
+      z-index: 5;
+      opacity: 0.3;
+    }
+
+    .radar-ring {
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(0, 200, 80, 0.4);
+      border-radius: 50%;
+    }
+
+    .radar-ring-2 {
+      position: absolute;
+      inset: 15px;
+      border: 1px solid rgba(0, 200, 80, 0.3);
+      border-radius: 50%;
+    }
+
+    .radar-ring-3 {
+      position: absolute;
+      inset: 30px;
+      border: 1px solid rgba(0, 200, 80, 0.2);
+      border-radius: 50%;
+    }
+
+    .radar-cross-h {
+      position: absolute;
+      top: 50%;
+      left: 0; right: 0;
+      height: 1px;
+      background: rgba(0, 200, 80, 0.2);
+      transform: translateY(-50%);
+    }
+
+    .radar-cross-v {
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: rgba(0, 200, 80, 0.2);
+      transform: translateX(-50%);
+    }
+
+    .radar-sweep {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      animation: radarSpin 4s linear infinite;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(0, 200, 80, 0.4) 15deg,
+        transparent 20deg
+      );
+    }
+
+    @keyframes radarSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Particles -->
+  <div class="particles-container" id="particles"></div>
+
+  <!-- Radar -->
+  <div class="radar">
+    <div class="radar-ring"></div>
+    <div class="radar-ring-2"></div>
+    <div class="radar-ring-3"></div>
+    <div class="radar-cross-h"></div>
+    <div class="radar-cross-v"></div>
+    <div class="radar-sweep"></div>
+  </div>
+
+  <div class="card">
+    <!-- Top bar -->
+    <div class="top-bar">
+      <span>MISSION: BDAY-17</span>
+      <div class="status-dot"></div>
+      <span>OPERATOR: CUPID-AI</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <img class="hero-image" src="soldier-reference.png" alt="SAF Special Forces" />
+      <div class="nvg-glow"></div>
+      <div class="stamp">Top Secret</div>
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="header-section">
+      <div class="mission-label">⬡ MISSION OBJECTIVE ⬡</div>
+      <div class="happy-bday">Happy Birthday</div>
+      <div class="name">Lucas</div>
+      <div class="age-badge">🎖️ Turning 17 🎖️</div>
+    </div>
+
+    <!-- Divider -->
+    <div class="tac-divider">
+      <div class="line"></div>
+      <div class="diamond"></div>
+      <div class="line"></div>
+    </div>
+
+    <!-- Flag -->
+    <div class="flag-row">🇸🇬 🎯 🔫</div>
+
+    <!-- Message -->
+    <div class="message-box">
+      <p>Happy 17th, soldier. <span class="highlight">Mission: Birthday</span> is officially underway.</p>
+      <p>You've levelled up — stronger, sharper, and ready for whatever comes next. We couldn't be more proud of the young man you're becoming.</p>
+      <p>Stay locked in. <span class="highlight">Stay dangerous.</span> And eat some cake. 🎂</p>
+    </div>
+
+    <!-- Signature -->
+    <div class="signature">— Daddy, Mummy, Lucius 🐼 & Lucinda 🦄</div>
+
+    <!-- Bottom bar -->
+    <div class="bottom-bar">
+      <span>DEC 11, 2026</span>
+      <span>CLASSIFIED</span>
+      <span>CUPID-AI SYS</span>
+    </div>
+  </div>
+
+  <script>
+    // Falling particles
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 25; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      const left = Math.random() * 100;
+      const duration = Math.random() * 8 + 6;
+      const delay = Math.random() * 10;
+      const size = Math.random() * 2 + 1;
+      p.style.cssText = `
+        left: ${left}%;
+        width: ${size}px;
+        height: ${size}px;
+        animation-duration: ${duration}s;
+        animation-delay: ${delay}s;
+      `;
+      container.appendChild(p);
+    }
+  </script>
+</body>
+</html>
